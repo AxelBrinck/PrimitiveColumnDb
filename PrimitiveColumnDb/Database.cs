@@ -21,5 +21,15 @@ namespace PrimitiveColumnDb
 
             Directory.CreateDirectory(path);
         }
+        
+        public void DeleteTable(string tableName)
+        {
+            var path = 
+                FolderPath.FullName + 
+                Path.DirectorySeparatorChar + 
+                tableName;
+
+            Directory.Delete(path, true);
+        }
     }
 }
