@@ -5,17 +5,21 @@ namespace PrimitiveColumnDb
 {
     public class Database
     {
-        public string Path { get; private set; }
+        public DirectoryInfo FolderPath { get; private set; }
 
         public Database(string path)
         {
-            Directory.CreateDirectory(path);
-            Path = path;
+            FolderPath = Directory.CreateDirectory(path);
         }
 
-        public void test()
+        public void CreateTable(string tableName)
         {
-            
+            var path = 
+                FolderPath.FullName + 
+                Path.DirectorySeparatorChar + 
+                tableName;
+
+            Directory.CreateDirectory(path);
         }
     }
 }
