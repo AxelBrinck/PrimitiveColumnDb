@@ -34,7 +34,7 @@ namespace PrimitiveColumnDb.Tests
 
             if (!Directory.Exists(DbRelativePath))
             {
-                Assert.Fail($"Tried to instantiate with argument: {DbRelativePath}. This argument should be the name of a subfolder. This subfolder was not found.");
+                Assert.Fail($@"Could not find directory: {DbRelativePath}");
             }
 
             Assert.Pass();
