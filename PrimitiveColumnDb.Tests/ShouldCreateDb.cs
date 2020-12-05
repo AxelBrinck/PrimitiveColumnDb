@@ -8,10 +8,10 @@ namespace PrimitiveColumnDb.Tests
     public class ShouldCreateDb
     {
         private Database database;
-        private static readonly string DbRelativePath = "data";
+        private static readonly string DbRelativePath = "test_data";
 
         [TearDown]
-        public void Setup()
+        public void TearDown()
         {
             if (Directory.Exists(DbRelativePath))
             {
