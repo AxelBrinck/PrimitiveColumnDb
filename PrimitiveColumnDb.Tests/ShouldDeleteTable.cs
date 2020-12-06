@@ -7,7 +7,8 @@ namespace PrimitiveColumnDb.Tests
     public class ShouldDeleteTable
     {
         private static readonly string DbRelativePath = "test_data";
-        private static readonly string TableNameA = "test_table";
+        private static readonly string TableNameA = "test_table_a";
+        private static readonly string TableNameB = "test_table_b";
         private Database database;
 
         [SetUp]
@@ -26,10 +27,8 @@ namespace PrimitiveColumnDb.Tests
         }
         
         [Test]
-        public void ShouldDeleteATable()
+        public void Should_Be_Able_To_Delete_Specified_Table()
         {
-            database = new Database(DbRelativePath);
-
             database.CreateTable(TableNameA);
 
             var pathA = 
@@ -39,7 +38,7 @@ namespace PrimitiveColumnDb.Tests
 
             if (!Directory.Exists(pathA))
             {
-                Assert.Fail($@"Could not create a table named {TableNameA} 
+                Assert.Fail($@"Could not locate a table named {TableNameA} 
                 with an expected location at {pathA}.");
             }
 
@@ -47,10 +46,55 @@ namespace PrimitiveColumnDb.Tests
 
             if (Directory.Exists(pathA))
             {
-                Assert.Fail($@"Could not delete a table named {TableNameA} 
+                Assert.Fail($@"Table {TableNameA} should have been removed. 
+                But was found at {pathA}.");
+            }
+
+            Assert.Pass();
+        }
+
+        [Test]
+        public void Should_Be_Able_To_Delete_All_Tables()
+        {
+            database.CreateTable(TableNameA);
+            database.CreateTable(TableNameB);
+
+            var pathA = 
+                DbRelativePath + 
+                Path.DirectorySeparatorChar + 
+                TableNameA;
+
+            var pathB = 
+                DbRelativePath + 
+                Path.DirectorySeparatorChar + 
+                TableNameB;
+
+            if (!Directory.Exists(pathA))
+            {
+                Assert.Fail($@"Could not locate a table named {TableNameA} 
                 with an expected location at {pathA}.");
             }
 
+            if (!Directory.Exists(pathB))
+            {
+                Assert.Fail($@"Could not locate a table named {TableNameB} 
+                with an expected location at {pathB}.");
+            }
+
+            database.Purge();
+
+            if (Directory.Exists(pathA))
+            {
+                Assert.Fail($@"Table {TableNameA} should have been removed. 
+                But was found at {pathA}.");
+            }
+
+            if (Directory.Exists(pathB))
+            {
+                Assert.Fail($@"Table {TableNameB} should have been removed. 
+                But was found at {pathB}.");
+            }
+            
             Assert.Pass();
         }
     }

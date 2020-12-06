@@ -31,5 +31,18 @@ namespace PrimitiveColumnDb
 
             Directory.Delete(path, true);
         }
+
+        public void Purge()
+        {
+            foreach (var file in FolderPath.GetFiles())
+            {
+                file.Delete(); 
+            }
+            
+            foreach (var directory in FolderPath.GetDirectories())
+            {
+                directory.Delete(true); 
+            }
+        }
     }
 }
