@@ -12,7 +12,7 @@ namespace PrimitiveColumnDb.Tests
         private Database database;
 
         [SetUp]
-        public void Setup()
+        public void SetUp()
         {
             database = new Database(DbRelativePath);
         }
@@ -27,10 +27,8 @@ namespace PrimitiveColumnDb.Tests
         }
 
         [Test]
-        public void ShouldCreateATableGivenAName()
+        public void Should_Be_Able_To_Create_A_Table_Given_A_Name()
         {
-            database = new Database(DbRelativePath);
-
             database.CreateTable(TableNameA);
 
             var path = 
@@ -47,10 +45,8 @@ namespace PrimitiveColumnDb.Tests
         }
 
         [Test]
-        public void ShouldCreateSeveralTables()
+        public void Should_Be_Able_To_Create_Several_Tables()
         {
-            database = new Database(DbRelativePath);
-
             database.CreateTable(TableNameA);
             database.CreateTable(TableNameB);
 
@@ -75,10 +71,8 @@ namespace PrimitiveColumnDb.Tests
         }
 
         [Test]
-        public void ShouldDeleteATable()
+        public void Should_Be_Able_To_Delete_Specified_Table()
         {
-            database = new Database(DbRelativePath);
-
             database.CreateTable(TableNameA);
 
             var pathA = 
